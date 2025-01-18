@@ -1,0 +1,5 @@
+train: ./Dataset/train/images
+val: ./Dataset/test/images
+
+nc: 2
+names: ['normal', 'kidney_stone']
