@@ -26,7 +26,6 @@ def load_and_preprocess_image(image_path, label, transform=None):
 
 
 
-
 train_transform = A.Compose([
     A.Resize(416, 416),
     A.HorizontalFlip(p=0.5),
@@ -38,9 +37,10 @@ val_transform = A.Compose([
     A.Resize(416, 416),
     A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
 ])
-
-normal_images_path = './Dataset/Kidney_stone_train/Normal'
-stone_images_path = './Dataset/Kidney_stone_train/Kidney_stone'
+train_normal_images_path = './Dataset/Kidney_stone_train/Normal'
+train_stone_images_path = './Dataset/Kidney_stone_train/Kidney_stone'
+test_normal_images_path = './Dataset/Kidney_stone_test/Normal'
+test_stone_images_path = './Dataset/Kidney_stone_test/Kidney_stone'
 
 normal_images = [os.path.join(normal_images_path, img) for img in os.listdir(normal_images_path)]
 stone_images = [os.path.join(stone_images_path, img) for img in os.listdir(stone_images_path)]
@@ -82,7 +82,7 @@ model.train(
         amp=True
 )
 
-model_dir = './models'
+model_dir = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/models'
 os.makedirs(model_dir, exist_ok=True)
 
 model_path = os.path.join(model_dir, 'kidney_stone_yolov9.pt')

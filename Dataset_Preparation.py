@@ -4,54 +4,45 @@ import shutil
 
 def prepare_dataset(base_path, train_source, test_source):
     print("Preparing dataset...")
-    print("basepath>>>>", base_path)
     os.makedirs(f'{base_path}/train/images', exist_ok=True)
     os.makedirs(f'{base_path}/train/labels', exist_ok=True)
     os.makedirs(f'{base_path}/test/images', exist_ok=True)
     os.makedirs(f'{base_path}/test/labels', exist_ok=True)
 
     for category in ['Kidney_stone', 'Normal']:
-        category_path = os.path.join(train_source, category)
-        for img_file in os.listdir(category_path):
-            src_path = os.path.join(category_path, img_file)
+        category_path_train = os.path.join(train_source, category)
+        category_path_test = os.path.join(test_source, category)
+        label_value = 1 if category == 'Kidney_stone' else 0
+
+        for img_file in os.listdir(category_path_train):
+            src_path = os.path.join(category_path_train, img_file)
             dest_path = os.path.join(f'{base_path}/train/images', img_file)
             shutil.copy(src_path, dest_path)
-            print(f"Copied {img_file} to train.")
+            print(f"Copied {img_file} to train as {dest_path}.")
+            generate_label(dest_path, f'{base_path}/train/labels', label_value)
 
-    for category in ['Kidney_stone', 'Normal']:
-        category_path = os.path.join(test_source, category)
-        for img_file in os.listdir(category_path):
-            src_path = os.path.join(category_path, img_file)
+        for img_file in os.listdir(category_path_test):
+            src_path = os.path.join(category_path_test, img_file)
             dest_path = os.path.join(f'{base_path}/test/images', img_file)
             shutil.copy(src_path, dest_path)
-            print(f"Copied {img_file} to test/images.")
-
-    print("Generating labels for training data...")
-    generate_labels(f'{base_path}//train', f'{base_path}/train/labels')
-    print("Generating labels for test data...")
-    generate_labels(f'{base_path}/test/images', f'{base_path}/test/labels')
+            print(f"Copied {img_file} to test/images as {dest_path}.")
+            generate_label(dest_path, f'{base_path}/test/labels', label_value)
 
     print("Dataset preparation completed.")
 
 
-def generate_labels(image_folder, labels_folder):
+def generate_label(image_path, labels_folder, label_value):
     os.makedirs(labels_folder, exist_ok=True)
+    img_file = os.path.basename(image_path)
+    print("img_file", img_file)
+    label_file = os.path.splitext(img_file)[0] + '.txt'
+    print("label_file", label_file)
+    label_path = os.path.join(labels_folder, label_file)
+    print("label_path", label_path)
 
-    for img_file in os.listdir(image_folder):
-        if img_file.endswith(('.png', '.jpg', '.jpeg')):
-            label_file = os.path.splitext(img_file)[0] + '.txt'
-            label_path = os.path.join(labels_folder, label_file)
-
-            try:
-                with open(label_path, 'w') as f:
-                    if 'Normal' in image_folder:
-                        f.write(labels_folder+'/0 0.5 0.5 0.5 0.5\n')
-                        print(f"Labeled {img_file} as Normal (Class 0).")
-                    elif 'Kidney_stone' in image_folder:
-                        f.write(labels_folder+'/1 0.5 0.5 0.5 0.5\n')
-                        print(f"Labeled {img_file} as Kidney Stone (Class 1).")
-                    else:
-                        print(f"Warning: {img_file} did not match any known class.")
-            except IOError as e:
-                print(f"Error writing to {label_path}: {e}")
-
+    try:
+        with open(label_path, 'w') as f:
+            f.write(f'{label_value} 0.5 0.5 0.5 0.5\n')
+            print(f"Labeled {img_file} as Class {label_value}.")
+    except IOError as e:
+        print(f"Error writing to {label_path}: {e}")
