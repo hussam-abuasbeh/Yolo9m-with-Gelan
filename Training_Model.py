@@ -49,8 +49,8 @@ def train_model(train_path='./Dataset/train', test_path='./Dataset/test'):
     train_images, train_labels = load_data(train_path)
     test_images, test_labels = load_data(test_path)
 
-    print(f"Found {len(train_images)} normal images and {len(test_images)} kidney stone images.")
-    print(f"Found {len(train_labels)} normal labels and {len(test_labels)} kidney stone labels.")
+    print(f"Found {len(train_images)} normal images and {len(test_images)} Test images images.")
+    print(f"Found {len(train_labels)} normal labels and {len(test_labels)} Test images labels.")
 
     X_train, X_temp, y_train, y_temp = train_test_split(train_images, train_labels, test_size=0.3, random_state=42)
     X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.33, random_state=42)
@@ -87,3 +87,6 @@ def train_model(train_path='./Dataset/train', test_path='./Dataset/test'):
     print(f"Model saved at: {model_path}")
 
     torch.cuda.empty_cache()
+
+if __name__ == "__main__":
+    train_model()

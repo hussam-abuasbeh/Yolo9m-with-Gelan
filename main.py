@@ -1,6 +1,6 @@
-# from Training_Model import train_model
-# from Prediction import predict_image
 from Dataset_Preparation import prepare_dataset
+from Training_Model import train_model
+from Prediction import predict_image
 
 def main():
     print("Preparing the dataset...")
@@ -12,11 +12,11 @@ def main():
     )
 
     print("Starting model training...")
-    # train_model()
+    train_model()
 
     print("Running prediction on a sample image...")
     sample_image = './Dataset/Kidney_stone_test/Kidney_stone/1.3.46.670589.33.1.63713387527670842200001.5657070162345407644.png'
-    # predict_image(sample_image)
+    predict_image(sample_image)
 
     print("Process completed successfully.")
 
