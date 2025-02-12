@@ -4,10 +4,8 @@ from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
 from ultralytics import YOLO
 import albumentations as A
-import matplotlib
 import cv2
 from utils import load_data
-matplotlib.use('Agg')
 
 
 class KidneyStoneDataset(torch.utils.data.Dataset):
@@ -28,7 +26,7 @@ class KidneyStoneDataset(torch.utils.data.Dataset):
             image = augmented['image']
 
         label = self.labels[idx]
-        image = torch.tensor(image).permute(2, 0, 1).float()  # Channels first
+        image = torch.tensor(image).permute(2, 0, 1).float()
         return image, label
 
 
@@ -79,12 +77,11 @@ def train_model(train_path='./Dataset/train', test_path='./Dataset/test'):
             amp=True
     )
 
-    model_dir = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/models'
-    os.makedirs(model_dir, exist_ok=True)
-
-    model_path = os.path.join(model_dir, 'kidney_stone_yolov9.pt')
-    model.save(model_path)
-    print(f"Model saved at: {model_path}")
+    # model_dir = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/models'
+    # os.makedirs(model_dir, exist_ok=True)
+    # model_path = os.path.join(model_dir, 'kidney_stone_yolov9.pt')
+    # model.save(model_path)
+    # print(f"Model saved at: {model_path}")
 
     torch.cuda.empty_cache()
 

@@ -4,8 +4,8 @@ from PIL import Image
 from ultralytics import YOLO
 import PySimpleGUI as sg
 
-model = YOLO('runs/detect/train2/weights/best.pt')
-#
+model = YOLO('runs/detect/train20/weights/best.pt')
+
 # image_path = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/Dataset/Kidney_stone_test/Kidney_stone/1.3.46.670589.33.1.63740863580178781200001.5086422129430942692.png'
 #
 # results = model.predict(source=image_path, save=True, imgsz=640, conf=0.5)
@@ -43,7 +43,7 @@ def predict_image(image_path):
 
 layout = [
     [sg.Text("Select an Image for Kidney Stone Detection:")],
-    [sg.Input(key="-FILE-", enable_events=True, visible=False), sg.FileBrowse("Browse", file_types=(("PNG Files", "*.png")))],  # Corrected file_types as a list of tuples
+    [sg.Input(key="-FILE-", enable_events=True, visible=False), sg.FileBrowse("Browse", file_types=(("PNG Files", "*.png")))],
     [sg.Image(key="-IMAGE-", size=(400, 400))],
     [sg.Text("Prediction Results:", key="-RESULTS-", size=(40, 5))],
     [sg.Button("Exit")]

@@ -1,7 +1,6 @@
 import os
 import shutil
 
-
 def prepare_dataset(base_path, train_source, test_source):
     print("Preparing dataset...")
     os.makedirs(f'{base_path}/train/images', exist_ok=True)

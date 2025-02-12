@@ -42,7 +42,7 @@ The model is trained using YOLOv9:
     model = YOLO('yolov9m.pt')
     model.train(
         data='/path/to/kidney_stone_dataset.yaml',
-        epochs=30,     #Enable to increase
+        epochs=40,     #Enable to increase
         batch=16,
         imgsz=416,
         verbose=True,
