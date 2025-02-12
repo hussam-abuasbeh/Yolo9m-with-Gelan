@@ -10,15 +10,7 @@ for label_file in os.listdir(label_dir):
             if line.startswith('0'):
                 class_1_count += 1
 
-
-# Found 1477 normal images and 346 kidney stone images.
-# Found 1477 normal labels and 346 kidney stone labels.
-
-# Folder 'Kidney_stone' contains 636 image(s).
-# Folder 'Normal' contains 841 image(s).
-# Folder 'Kidney_stone' contains 165 image(s).
-# Folder 'Normal' contains 181 image(s).
-
+                
 def size_files(folder_path):
     image_counts = {}
     valid_extensions = (".jbg", ".jpeg", ".png", ".gif", ".bmp", "tiff", "webp")
@@ -43,4 +35,10 @@ if __name__ ==  "__main__":
         print(f"Folder '{folder}' contains {count} image(s).")
 
 
+# Found 1477 normal images and 346 kidney stone images.
+# Found 1477 normal labels and 346 kidney stone labels.
 
+# Folder 'Kidney_stone' contains 636 image(s).
+# Folder 'Normal' contains 841 image(s).
+# Folder 'Kidney_stone' contains 165 image(s).
+# Folder 'Normal' contains 181 image(s).
