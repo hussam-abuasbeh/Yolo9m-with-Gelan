@@ -60,6 +60,7 @@ def train_model(train_path='./Dataset/train', test_path='./Dataset/test'):
     train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=2)
     val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False, num_workers=2)
     test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False, num_workers=2)
+
     print("train_loader>>>", train_loader)
     print("val_loader>>>", val_loader)
     print("test_loader>>>", test_loader)
@@ -76,12 +77,6 @@ def train_model(train_path='./Dataset/train', test_path='./Dataset/test'):
             workers=2,
             amp=True
     )
-
-    # model_dir = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/models'
-    # os.makedirs(model_dir, exist_ok=True)
-    # model_path = os.path.join(model_dir, 'kidney_stone_yolov9.pt')
-    # model.save(model_path)
-    # print(f"Model saved at: {model_path}")
 
     torch.cuda.empty_cache()
 

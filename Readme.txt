@@ -9,7 +9,7 @@ The model is trained to classify images into two categories:
 1. Kidney Stone (Class 1)
 2. Normal (Class 0)
 
-Project Structure
+Dataset Structure
 -----------------
 .
 ├── Dataset/
@@ -19,14 +19,12 @@ Project Structure
 │   ├── Kidney_stone_test/
 │   │   ├── Normal/
 │   │   └── Kidney_stone/
-├── models/                     # Directory to save the trained model
-├── train/                      # Stores generated training images and labels
-│   ├── images/
-│   └── labels/
-└── test/                       # Stores generated test images and labels
-    ├── images/
-    └── labels/
-
+│   ├── train/
+│   │   ├── images/
+│   │   └── labels/
+│   ├── test/
+│   │   ├── images/
+│   │   └── labels/
 
 
 How to Run the Project
@@ -53,18 +51,8 @@ The model is trained using YOLOv9:
 Step 3: Test and Predict
 Use the trained model to predict kidney stones in test images.
 
-    from ultralytics import YOLO
-    from PIL import Image
-
     model = YOLO('models/kidney_stone_yolov9.pt')
     results = model.predict(source=image_path, save=True, imgsz=640, conf=0.5)
-
-    for result in results:
-        for box in result.boxes:
-            cls = int(box.cls[0])
-            conf = box.conf[0]
-            class_name = 'Kidney Stone' if cls == 1 else 'Normal'
-            print(f"Predicted Class: {class_name}, Confidence: {conf:.2f}")
 
 Code Explanation
 ----------------
@@ -85,4 +73,4 @@ Dependencies
 - OpenCV
 - PIL
 - ultralytics (YOLOv9)
-
+- Pysimple GUI

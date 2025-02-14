@@ -1,10 +1,12 @@
 import os
 
-label_dir = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/Dataset/train/labels'
+label_dir_tr = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/Dataset/train/labels'
+label_dir_te = '/Users/7usamabuasbeh/PycharmProjects/Yolo9/Dataset/test/labels'
+
 class_1_count = 0
 
-for label_file in os.listdir(label_dir):
-    with open(os.path.join(label_dir, label_file), 'r') as f:
+for label_file in os.listdir(label_dir_tr):
+    with open(os.path.join(label_dir_tr, label_file), 'r') as f:
         content = f.readlines()
         for line in content:
             if line.startswith('0'):

@@ -43,5 +43,5 @@ def generate_label(image_path, labels_folder, label_value):
         with open(label_path, 'w') as f:
             f.write(f'{label_value} 0.5 0.5 0.5 0.5\n')
             print(f"Labeled {img_file} as Class {label_value}.")
-    except IOError as e:
+    except Exception as e:
         print(f"Error writing to {label_path}: {e}")
